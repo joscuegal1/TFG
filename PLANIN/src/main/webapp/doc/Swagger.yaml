@@ -1,0 +1,162 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: PLANIN Api.
+  # put the contact info for your development or API team
+  contact:
+    email: cuevasrivassoftware@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+
+
+
+paths:
+  /ciudades/{id}:
+    get:
+      tags:
+      - ciudades
+      summary: Devuelve una ciudad
+      operationId: getCiudad
+      description: |
+        Devuelve una ciudad pasandole un id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Cadena de caractéres identificativa de cada ciudad
+        required: true
+        type: string
+     
+      responses:
+        200:
+          description: Resultados de la búsqueda
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Ciudad'
+        400:
+          description: El parámetro introducido no es válido
+    delete:
+      tags:
+      - ciuadades
+      summary: Elimina una ciudad
+      operationId: deleteCiudad
+      description: Eliminar ciudad de un id dado
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Cadena de caractéres identificativa de cada ciudad
+        required: true
+        type: string
+      responses:
+        204:
+          description: ciudad eliminada
+        400:
+          description: Objeto inválido no se ha podido eliminar el objeto deseado
+        500:
+          description: error en el servidor
+  /ciudades:
+    get:
+      tags:
+      - ciudades
+      summary: Devuelve todas las ciudades
+      operationId: getCiudades
+      description: |
+        Devuelve todas las ciudades 
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Devuelve todas las ciudades
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ciudad'
+        400:
+          description: Parámetros incorrectos
+    put:
+      tags:
+      - ciudades
+      summary: Edita una ciudad determinada 
+      operationId: setCiudades
+      description: Modifica la informacion de una ciudad
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: Actualiza una ciudad
+        description: Inserta una ciudad para actualizar
+        schema:
+          $ref: '#/definitions/Ciudad'
+    
+       
+          
+      
+      responses:
+        204:
+          description: OK
+          schema:
+            type: object
+            
+    
+    post:
+      tags:
+      - ciudades
+      summary: Añade una ciudad
+      operationId: AddCiudad
+      description: Añade una ciudad 
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: ciudad
+        description: Una ciudad para añadir
+        schema:
+          $ref: '#/definitions/Ciudad'
+     
+      responses:
+        200:
+          description: ciudad añadida
+        400:
+          description: Parámetro inválido no se ha podido añadir el objeto deseado
+        500:
+          description: error en el servidor        
+
+  
+    
+          
+definitions:
+  Ciudad:
+    type: object
+    required:
+    - id
+    - nombre
+    properties:
+      id:
+        type: string
+        example: a133se
+      nombre:
+        type: string
+        example: Sevilla
+ 
+
+schemes:
+ - https
+
+# host: proyecto-improv.appspot.com
+# basePath: /api
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /PLAN88/GooglePlaces/1.0.0

@@ -1,0 +1,19 @@
+{	
+    "GooglePlaces": { 
+        "tokenUrl": "https://www.googleapis.com/oauth2/v4/token ",
+        "clientId": "1091296207935-lgu24iha1diobg0q1i64ln9jmpf9jr1f.apps.googleusercontent.com",
+        "clientSecret": "RUOCCmmwEevslp6rDxd3mpqP",
+        "authorizationFormUrl": "https://accounts.google.com/o/oauth2/v2/auth ",
+        "scopes": ["https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters", 
+        "https://maps.googleapis.com/maps/api/place/details/output?parameters"]
+    },
+    "GoogleCalendar": {
+		"tokenUrl":"https://www.googleapis.com/oauth2/v4/token",
+		"clientId": "1091296207935-j27deqqshbscct46d5kbdvrej1iidp7f.apps.googleusercontent.com",
+        "clientSecret": "tcC62gRVvZo3M-eSrLq-A9vV",
+		"authorizationFormUrl":"https://accounts.google.com/o/oauth2/v2/auth",
+		"scopes":["https://www.googleapis.com/auth/calendar"]
+		
+	}
+  
+}		

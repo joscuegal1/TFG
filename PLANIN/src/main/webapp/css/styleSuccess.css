@@ -1,0 +1,83 @@
+@CHARSET "ISO-8859-1";
+
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+body{
+	
+	font-family: Gill Sans MT, Helvetica, sans-serif;
+	background-image: url("imagenfondo.jpg");
+}
+#searchDiv {
+	text-align: center;
+}
+
+fieldset {
+	border: 5px solid gray;
+	width:70%;
+	margin-right:1%;
+	font-family: Gill Sans MT, Helvetica, sans-serif;
+	float:center;
+	font-size: 150%;
+	border-style: double;
+  	border-width: thick;
+  	border-style: solid;
+    border-color: black;
+    border-style: ridge;
+    border-radius: 12px;
+    background-color: lightgrey;
+	
+}
+
+i{
+	padding: 0.2em 0.5em;
+/*	border: 1px solid gray; */
+	font-size: 80%;
+	text-align: center;
+	color: black;
+	text-transform:capitalize;
+	font-family: Gill Sans MT, Helvetica, sans-serif;
+	line-height: 1.0;
+	word-spacing: 8px;
+	font-weight: bold;
+	
+	
+}
+
+legend {
+	padding: 0.2em 0.5em;
+/*	border: 1px solid gray; */
+	font-size: 100%;
+	text-align: center;
+	color:  #3c5d78 ;
+	text-transform: uppercase;
+	font-family: Gill Sans MT, Helvetica, sans-serif;
+	line-height: 1.0;
+	word-spacing: 8px;
+	
+	border: 5px solid gray;
+	border-style: double;
+  	border-width: thick;
+  	border-style: solid;
+    border-color: black;
+    border-style: ridge;
+    border-radius: 12px;
+	background-color: lightgrey;
+}
+
+
+a{
+	line-height: 1.5;
+}
+font{
+	  font-weight: bold;
+	
+}
+#flickr img {
+	max-width: 95%;
+}

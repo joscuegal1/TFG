@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+
+.center {
+  position: absolute;
+  left: 20%;
+  top: 35%;
+  width: 100%;
+  text-align: left;
+  font-size: 24px;
+}
+
+.centerup {
+  color: white ;
+  position: absolute;
+  left: 20%;
+  top: 25%;
+  width: 100%;
+  text-align: left;
+  font-size: 30px;
+}
+
+.main {
+	background-image: url("imagenfondo.jpg");
+	background-position: absolute ;
+	overflow: hidden;
+	height: 80vh;
+}
+
+.footer {
+	height: 20vh;
+	background-color: #ccc;
+}
+
+.main .title {
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	color: #fff;
+	top: calc(80vh - 50%);
+	left: 50%;
+	position: absolute;
+	margin-left: -150pc;
+}
+
