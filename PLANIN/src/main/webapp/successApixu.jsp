@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Usted esta cerca de <c:out value="${requestScope.titulo.name}"/></h1>
+<h1>El equipo mas grande de Sevilla es el <c:out value="${requestScope.nombre}"/> y su estadio es el <c:out value="${requestScope.estadio}"/> </h1>
 
 
 

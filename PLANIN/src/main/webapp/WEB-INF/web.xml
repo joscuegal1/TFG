@@ -40,6 +40,16 @@
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/SearchController</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>SoccerController</display-name>
+    <servlet-name>SoccerController</servlet-name>
+    <servlet-class>aiss.controller.SoccerController</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>SoccerController</servlet-name>
+    <url-pattern>/SoccerController</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>GooglePlacesSearchController</display-name>
