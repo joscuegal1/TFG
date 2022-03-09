@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.apixu.ElTiempo;
+import aiss.model.estadisticas.Estadisticas;
 import aiss.model.google.maps.PlaceNearbySearch;
 import aiss.model.resource.ApixuResource;
 import aiss.model.resource.GooglePlacesResource;
@@ -47,17 +48,17 @@ public class SoccerController extends HttpServlet {
 		// Search for movies in OMDb
 		//log.log(Level.FINE, "Searching for OMDb movies that contain " + query);
 		SoccerResource soccer = new SoccerResource();
-		Equipo competitorLocal = soccer.getCompetitor(local);
-		Equipo competitorVisitante = soccer.getCompetitor(visitante);
+		Estadisticas competitorLocal = soccer.getEstadisticas(local);
+		Estadisticas competitorVisitante = soccer.getEstadisticas(visitante);
 
 		
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
 			rd = request.getRequestDispatcher("/successApixu.jsp");
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
-			request.setAttribute("estadioLocal", competitorLocal.getVenue().getName());
+			request.setAttribute("golesAFavorLocal", competitorLocal.getCompetitor().getStatistics().getGoalsScored());
 			request.setAttribute("nombreVisitante", competitorVisitante.getCompetitor().getName());
-			request.setAttribute("estadioVisitante", competitorVisitante.getVenue().getName());
+			request.setAttribute("golesAFavorVisitante", competitorVisitante.getCompetitor().getStatistics().getGoalsScored());
 		
 		}else {
 			log.log(Level.SEVERE, "OMDb object: " + competitorLocal);

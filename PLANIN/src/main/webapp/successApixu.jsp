@@ -10,8 +10,8 @@
 </head>
 <body>
 
-<h1>El equipo LOCAL es el <c:out value="${requestScope.nombreLocal}"/> y su estadio es el <c:out value="${requestScope.estadioLocal}"/> </h1>
-<h1>El equipo VISITANTE es el <c:out value="${requestScope.nombreVisitante}"/> y su estadio es el <c:out value="${requestScope.estadioVisitante}"/> </h1>
+<h1>El equipo LOCAL es el <c:out value="${requestScope.nombreLocal}"/> y lleva <c:out value="${requestScope.golesAFavorLocal}"/> goles a favor </h1>
+<h1>El equipo VISITANTE es el <c:out value="${requestScope.nombreVisitante}"/> y lleva <c:out value="${requestScope.golesAFavorVisitante}"/> goles a favor</h1>
 
 
 <c:choose>
