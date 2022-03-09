@@ -23,16 +23,12 @@ public class SoccerResource {
 		
 		// Aseguramos que la cadena de busqueda esta en el formato correcto
 		String equipo = URLEncoder.encode(query, "UTF-8");
-
 		// Escribir url de busqueda
 		String uri ="https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo + "/profile.json?api_key=" + SOCCER_API_KEY;
-		
 		//Añadimos un log
 		log.log(Level.FINE, "SoccerURI: " + uri);
-		
 		//Pedir al servicio RESTful el recurso que queremos en formato json
 		ClientResource cr= new ClientResource(uri);
-		
 		//Convertir dicho recurso a formato java
 		Equipo competitor = cr.get(Equipo.class);
 

@@ -40,23 +40,27 @@ public class SoccerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
 		
-		String query = request.getParameter("searchQuery");
+		String local = request.getParameter("Local");
+		String visitante = request.getParameter("Visitante");
 		RequestDispatcher rd = null;
 		
 		// Search for movies in OMDb
-		log.log(Level.FINE, "Searching for OMDb movies that contain " + query);
+		//log.log(Level.FINE, "Searching for OMDb movies that contain " + query);
 		SoccerResource soccer = new SoccerResource();
-		Equipo competitor = soccer.getCompetitor(query);
+		Equipo competitorLocal = soccer.getCompetitor(local);
+		Equipo competitorVisitante = soccer.getCompetitor(visitante);
 
 		
 
-		if (competitor!=null){
+		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
 			rd = request.getRequestDispatcher("/successApixu.jsp");
-			request.setAttribute("nombre", competitor.getCompetitor().getName());
-			request.setAttribute("estadio", competitor.getVenue().getName());
+			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
+			request.setAttribute("estadioLocal", competitorLocal.getVenue().getName());
+			request.setAttribute("nombreVisitante", competitorVisitante.getCompetitor().getName());
+			request.setAttribute("estadioVisitante", competitorVisitante.getVenue().getName());
 		
-		} else {
-			log.log(Level.SEVERE, "OMDb object: " + competitor);
+		}else {
+			log.log(Level.SEVERE, "OMDb object: " + competitorLocal);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
 		rd.forward(request, response);
