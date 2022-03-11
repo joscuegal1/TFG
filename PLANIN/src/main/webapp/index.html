@@ -16,9 +16,59 @@
   
   <div class="center">
   		
+ 		<img src="escudos/fondo.png" width="128" height="96" border="0" name="ImagenLocal" >
+ 		<img src="escudos/fondo.png" width="128" height="96" border="0" name="ImagenVisitante" >
+ 	
+ 	<script>
+		var _img = new Array();
+   			_img[2829] = new Image(); _img[2829].src="escudos/RealMadrid.png";
+    		_img[2833] = new Image(); _img[2833].src="escudos/Sevilla.png";
+    		_img[2816] = new Image(); _img[2816].src="escudos/Betis.png";
+    		_img[2817] = new Image(); _img[2817].src="escudos/Barcelona.png";
+    		_img[2836] = new Image(); _img[2836].src="escudos/AtleticoMadrid.png";
+    		_img[2824] = new Image(); _img[2824].src="escudos/RealSociedad.png";
+    		_img[2819] = new Image(); _img[2819].src="escudos/Villarreal.png";
+    		_img[2825] = new Image(); _img[2825].src="escudos/Athletic.png";
+    		_img[2828] = new Image(); _img[2828].src="escudos/Valencia.png";
+    		_img[2821] = new Image(); _img[2821].src="escudos/Celta.png";
+    		_img[2820] = new Image(); _img[2820].src="escudos/Osasuna.png";
+   			_img[2818] = new Image(); _img[2818].src="escudos/RayoVallecano.png";
+    		_img[2846] = new Image(); _img[2846].src="escudos/Elche.png";
+    		_img[2814] = new Image(); _img[2814].src="escudos/Espanyol.png";
+    		_img[2859] = new Image(); _img[2859].src="escudos/Getafe.png";
+    		_img[2826] = new Image(); _img[2826].src="escudos/Mallorca.png";
+    		_img[33779] = new Image(); _img[33779].src="escudos/Granada.png";
+    		_img[4488] = new Image(); _img[4488].src="escudos/Cadiz.png";
+    		_img[2885] = new Image(); _img[2885].src="escudos/Alaves.png";
+    		_img[2849] = new Image(); _img[2849].src="escudos/Levante.png";
 
-		<form id="searchForm" action="SoccerController" method="post">
-		<select name="Local">
+    	
+    	function cambiarALocal(_obj){
+  			if(!_obj)return;
+  			var _index = _obj.selectedIndex;
+  			if(!_index)return;
+  			var _item  = _obj[_index].value;
+  			if(!_item)return;
+  			if(_item<0 || _item >=_img.length)return;
+  			document.images["ImagenLocal"].src=_img[_item].src;
+		}
+    	
+    	function cambiarAVisitante(_obj){
+  			if(!_obj)return;
+  			var _index = _obj.selectedIndex;
+  			if(!_index)return;
+  			var _item  = _obj[_index].value;
+  			if(!_item)return;
+  			if(_item<0 || _item >=_img.length)return;
+  			document.images["ImagenVisitante"].src=_img[_item].src;
+		}
+	</script>
+ 	
+ 	
+ 		
+		<form id="searchForm" name="searchForm" action="SoccerController" onsubmit="return validarFormulario()" method="post">
+		<select required name="Local" onchange="cambiarALocal(this)">
+   			<option value="" disabled selected hidden>Equipo Local</option>
    			<option value="2829">Real Madrid CF</option> 
    			<option value="2833">Sevilla FC</option> 
    			<option value="2816">Real Betis Balompié</option>
@@ -41,7 +91,8 @@
    			<option value="2849">Levante UD</option>    
 		</select>
 		
-		<select name="Visitante">
+		<select required name="Visitante" onchange="cambiarAVisitante(this)">
+			<option value="" disabled selected hidden>Equipo Visitante</option>
    			<option value="2829">Real Madrid CF</option> 
    			<option value="2833">Sevilla FC</option> 
    			<option value="2816">Real Betis Balompié</option>
@@ -66,6 +117,22 @@
 		
 		<input type="submit" name="searchBtn" title="search" value="Escoger">
 		</form>
+  
+  
+  
+  
+    <script>
+function validarFormulario() {
+	var local = document.forms["searchForm"]["Local"].selectedIndex;
+	var visitante = document.forms["searchForm"]["Visitante"].selectedIndex;
+	if( local == visitante) {
+		alert("¡No se pueden enfrentar dos equipos iguales! Elige dos equipos distintos.");
+		return false;					
+	}
+}
+
+</script> 
+  
   
   </div>
 
