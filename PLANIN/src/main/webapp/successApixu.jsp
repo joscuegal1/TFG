@@ -10,9 +10,17 @@
 </head>
 <body>
 
-<h1>El equipo LOCAL es el <c:out value="${requestScope.nombreLocal}"/> y lleva <c:out value="${requestScope.golesAFavorLocal}"/> goles a favor </h1>
-<h1>El equipo VISITANTE es el <c:out value="${requestScope.nombreVisitante}"/> y lleva <c:out value="${requestScope.golesAFavorVisitante}"/> goles a favor</h1>
+<h1>El equipo LOCAL es el <c:out value="${requestScope.nombreLocal}"/> y lleva: </h1>
 
+<h2><c:out value="${requestScope.golesAFavorLocal}"/> goles a favor </h2>
+<h2><c:out value="${requestScope.golesEnContraLocal}"/> en contra </h2>
+<h2> con un promedio de: </h2>
+<h2><c:out value="${requestScope.gFxPLocal}"/>  goles por partido a favor </h2> 
+<h2><c:out value="${requestScope.gCxPLocal}"/> en contra </h2> 
+
+<h1>El equipo VISITANTE es el <c:out value="${requestScope.nombreVisitante}"/> y lleva <c:out value="${requestScope.golesAFavorVisitante}"/> goles a favor 
+y  <c:out value="${requestScope.golesEnContraVisitante}"/> en contra, con un promedio de <c:out value="${requestScope.gFxPVisitante}"/>
+ goles por partido a favor y <c:out value="${requestScope.gCxPVisitante}"/> en contra </h1>
 
 <c:choose>
     <c:when test="${!empty requestScope.places2}">

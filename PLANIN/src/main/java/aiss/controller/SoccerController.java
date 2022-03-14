@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.apixu.ElTiempo;
 import aiss.model.estadisticas.Estadisticas;
+import aiss.model.estadisticas.Statistics__1;
 import aiss.model.google.maps.PlaceNearbySearch;
 import aiss.model.resource.ApixuResource;
 import aiss.model.resource.GooglePlacesResource;
@@ -55,10 +56,21 @@ public class SoccerController extends HttpServlet {
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
 			rd = request.getRequestDispatcher("/successApixu.jsp");
+			Statistics__1 estadisticasLocal = competitorLocal.getCompetitor().getStatistics();
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
-			request.setAttribute("golesAFavorLocal", competitorLocal.getCompetitor().getStatistics().getGoalsScored());
+			request.setAttribute("golesAFavorLocal", estadisticasLocal.getGoalsScored());
+			request.setAttribute("golesEnContraLocal", estadisticasLocal.getGoalsConceded());
+			request.setAttribute("gFxPLocal", Math.round(((double)estadisticasLocal.getGoalsScored() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
+			request.setAttribute("gCxPLocal", Math.round(((double)estadisticasLocal.getGoalsConceded() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
+			
+			
+			
+			Statistics__1 estadisticasVisitante = competitorVisitante.getCompetitor().getStatistics();
 			request.setAttribute("nombreVisitante", competitorVisitante.getCompetitor().getName());
-			request.setAttribute("golesAFavorVisitante", competitorVisitante.getCompetitor().getStatistics().getGoalsScored());
+			request.setAttribute("golesAFavorVisitante", estadisticasVisitante.getGoalsScored());
+			request.setAttribute("golesEnContraVisitante", estadisticasVisitante.getGoalsConceded());
+			request.setAttribute("gFxPVisitante", Math.round(((double)estadisticasVisitante.getGoalsScored() / (double)estadisticasVisitante.getMatchesPlayed())*100.0)/100.0);
+			request.setAttribute("gCxPVisitante", Math.round(((double)estadisticasVisitante.getGoalsConceded() / (double)estadisticasVisitante.getMatchesPlayed())*100.0)/100.0);
 		
 		}else {
 			log.log(Level.SEVERE, "OMDb object: " + competitorLocal);
