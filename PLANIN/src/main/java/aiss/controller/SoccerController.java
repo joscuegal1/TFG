@@ -60,6 +60,8 @@ public class SoccerController extends HttpServlet {
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
 			request.setAttribute("golesAFavorLocal", estadisticasLocal.getGoalsScored());
 			request.setAttribute("golesEnContraLocal", estadisticasLocal.getGoalsConceded());
+			request.setAttribute("aPuertaLocal", estadisticasLocal.getShotsOnTarget());
+			request.setAttribute("aPxPLocal", Math.round(((double)estadisticasLocal.getShotsOnTarget() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gFxPLocal", Math.round(((double)estadisticasLocal.getGoalsScored() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gCxPLocal", Math.round(((double)estadisticasLocal.getGoalsConceded() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
 			
@@ -69,6 +71,8 @@ public class SoccerController extends HttpServlet {
 			request.setAttribute("nombreVisitante", competitorVisitante.getCompetitor().getName());
 			request.setAttribute("golesAFavorVisitante", estadisticasVisitante.getGoalsScored());
 			request.setAttribute("golesEnContraVisitante", estadisticasVisitante.getGoalsConceded());
+			request.setAttribute("aPuertaVisitante", estadisticasVisitante.getShotsOnTarget());
+			request.setAttribute("aPxPVisitante", Math.round(((double)estadisticasVisitante.getShotsOnTarget() / (double)estadisticasVisitante.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gFxPVisitante", Math.round(((double)estadisticasVisitante.getGoalsScored() / (double)estadisticasVisitante.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gCxPVisitante", Math.round(((double)estadisticasVisitante.getGoalsConceded() / (double)estadisticasVisitante.getMatchesPlayed())*100.0)/100.0);
 		
