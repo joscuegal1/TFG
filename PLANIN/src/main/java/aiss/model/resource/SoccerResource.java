@@ -11,6 +11,7 @@ import aiss.model.apixu.ElTiempo;
 import aiss.model.estadisticas.Estadisticas;
 import aiss.model.soccer.Competitor;
 import aiss.model.soccer.Equipo;
+import aiss.model.temporada.Temporada;
 
 
 
@@ -45,6 +46,21 @@ public class SoccerResource {
 		
 		Estadisticas estadisticas = cr.get(Estadisticas.class);
 		return estadisticas;
+	
+	}
+	
+	public Temporada getTemporada(String seasonId) throws UnsupportedEncodingException{
+		
+		String season = URLEncoder.encode(seasonId, "UTF-8");
+		season = "84048";
+				
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:" + season + "/standings.json?api_key=" + SOCCER_API_KEY;
+		
+		log.log(Level.FINE, "SoccerURI: " + uri);
+		ClientResource cr= new ClientResource(uri);
+		
+		Temporada temporada = cr.get(Temporada.class);
+		return temporada;
 	
 	}
 	

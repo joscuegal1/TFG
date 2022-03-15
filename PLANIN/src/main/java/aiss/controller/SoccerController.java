@@ -1,8 +1,10 @@
 package aiss.controller;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ import aiss.model.resource.GooglePlacesResource;
 import aiss.model.resource.SoccerResource;
 import aiss.model.soccer.Competitor;
 import aiss.model.soccer.Equipo;
+import aiss.model.temporada.Temporada;
 
 /**
  * Servlet implementation class SearchController
@@ -51,14 +54,34 @@ public class SoccerController extends HttpServlet {
 		SoccerResource soccer = new SoccerResource();
 		Estadisticas competitorLocal = soccer.getEstadisticas(local);
 		Estadisticas competitorVisitante = soccer.getEstadisticas(visitante);
+		
+		try
+		{
+		    Thread.sleep(2000);
+		}
+		catch(InterruptedException ex)
+		{
+		    Thread.currentThread().interrupt();
+		}
+		String l = "48083";
+		Temporada temporada = soccer.getTemporada(l);
+	
 
 		
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
 			rd = request.getRequestDispatcher("/successApixu.jsp");
+			
+			
+			String home = "home";
+			String stage = "stage";
+			String idlocal = competitorLocal.getCompetitor().getId();
 			Statistics__1 estadisticasLocal = competitorLocal.getCompetitor().getStatistics();
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
-			request.setAttribute("golesAFavorLocal", estadisticasLocal.getGoalsScored());
+			request.setAttribute("golesAFavorLocal",temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
+																.getGroups().stream().findFirst().get()
+																.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
+																.getGoalsFor());
 			request.setAttribute("golesEnContraLocal", estadisticasLocal.getGoalsConceded());
 			request.setAttribute("aPuertaLocal", estadisticasLocal.getShotsOnTarget());
 			request.setAttribute("aPxPLocal", Math.round(((double)estadisticasLocal.getShotsOnTarget() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
