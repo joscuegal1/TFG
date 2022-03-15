@@ -49,12 +49,10 @@ public class SoccerResource {
 	
 	}
 	
-	public Temporada getTemporada(String seasonId) throws UnsupportedEncodingException{
+	public Temporada getTemporada() throws UnsupportedEncodingException{
 		
-		String season = URLEncoder.encode(seasonId, "UTF-8");
-		season = "84048";
-				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:" + season + "/standings.json?api_key=" + SOCCER_API_KEY;
+		
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:84048/standings.json?api_key=" + SOCCER_API_KEY;
 		
 		log.log(Level.FINE, "SoccerURI: " + uri);
 		ClientResource cr= new ClientResource(uri);

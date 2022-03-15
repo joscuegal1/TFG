@@ -13,9 +13,9 @@
 <fieldset id="local">
 <legend>Equipo local:  <c:out value="${requestScope.nombreLocal}"/></legend>
 
-<h2><c:out value="${requestScope.golesAFavorLocal}"/> goles a favor </h2>
-<h2><c:out value="${requestScope.golesEnContraLocal}"/> goles en contra </h2>
-<h2><c:out value="${requestScope.aPuertaLocal}"/> tiros a puerta a favor </h2>
+<h2><c:out value="${requestScope.Hf}"/> media de goles como local </h2>
+<h2><c:out value="${requestScope.Hf_r}"/> media de goles como local respecto al resto </h2>
+<h2><c:out value="${requestScope.promedioFavorLocal}"/> promedio goles locales </h2>
 
 <h2> con un promedio de: </h2>
 <h2><c:out value="${requestScope.gFxPLocal}"/>  goles por partido a favor </h2> 
