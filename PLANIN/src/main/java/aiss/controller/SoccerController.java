@@ -54,6 +54,18 @@ public class SoccerController extends HttpServlet {
 		//log.log(Level.FINE, "Searching for OMDb movies that contain " + query);
 		SoccerResource soccer = new SoccerResource();
 		Estadisticas competitorLocal = soccer.getEstadisticas(local);
+		
+		try
+		{
+		    Thread.sleep(2000);
+		}
+		catch(InterruptedException ex)
+		{
+		    Thread.currentThread().interrupt();
+		}
+		
+		
+		
 		Estadisticas competitorVisitante = soccer.getEstadisticas(visitante);
 		
 		try
@@ -74,7 +86,9 @@ public class SoccerController extends HttpServlet {
 			
 			
 			String home = "home";
+			String away = "away";
 			String idlocal = competitorLocal.getCompetitor().getId();
+			String idvisitante = competitorVisitante.getCompetitor().getId();
 			Statistics__1 estadisticasLocal = competitorLocal.getCompetitor().getStatistics();
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
 			
@@ -82,28 +96,108 @@ public class SoccerController extends HttpServlet {
 																.getGroups().stream().findFirst().get()
 																.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
 																.getGoalsFor();
-			Integer golesEnContraLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
-					.getGoalsAgainst();
 			
 			Integer partidosJugadosLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
 					.getGroups().stream().findFirst().get()
 					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
 					.getPlayed();
 			
+			
+				
 			Double promedioGolesFavorLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
 					.getGroups().stream().findFirst().get()
 					.getStandings().stream().mapToDouble(t -> (Math.round(((double)t.getGoalsFor() / (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
 		
+			//----------------------------------------------------------------------------------
 			
-			request.setAttribute("Hf", Math.round(((double)golesAFavorLocal/(double)partidosJugadosLocal)*100.0)/100.0);
-			request.setAttribute("Hf_r", Math.round((((double)golesAFavorLocal/(double)partidosJugadosLocal)/promedioGolesFavorLocal)*100.0)/100.0);
+			
+			Integer golesEnContraVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
+					.getGroups().stream().findFirst().get()
+					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
+					.getGoalsAgainst();
+			
+			Integer partidosJugadosVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
+					.getGroups().stream().findFirst().get()
+					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
+					.getPlayed();
+			
+			//---------------------------------------------------------------------------
+			
+			
+			Double hf = Math.round(((double)golesAFavorLocal/(double)partidosJugadosLocal)*100.0)/100.0;
+			Double hf_r = Math.round((hf/promedioGolesFavorLocal)*100.0)/100.0;
+			
+			Double ac = Math.round(((double)golesEnContraVisitante/(double)partidosJugadosVisitante)*100.0)/100.0;
+			Double ac_r = Math.round((ac/promedioGolesFavorLocal)*100.0)/100.0;
+			
+			Double golesEsperadosLocal = Math.round((hf_r * ac_r * promedioGolesFavorLocal)*100.0)/100.0;
+			
+			
+			request.setAttribute("Hf", hf);
+			request.setAttribute("Hf_r", hf_r);
+			request.setAttribute("promedioFavorLocal", Math.round(promedioGolesFavorLocal*100.0)/100.0);
+			request.setAttribute("golesEsperadosEquipoLocal", golesEsperadosLocal);
+									
+			
+			request.setAttribute("Ac", ac);
+			request.setAttribute("Ac_r", ac_r);
+			request.setAttribute("promedioEnContraVisitante", Math.round(promedioGolesFavorLocal*100.0)/100.0);
+			
+	//--------------------------VISITANTE-----------------------------------------------
+			
+			
+			Integer golesEnAFavorVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
+					.getGroups().stream().findFirst().get()
+					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
+					.getGoalsFor();
+			
+			Double promedioGolesEnContraLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
+					.getGroups().stream().findFirst().get()
+					.getStandings().stream().mapToDouble(t -> (Math.round(((double)t.getGoalsAgainst() / (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
+		
+	
+			
+			
+						
+			Double af = Math.round(((double)golesEnAFavorVisitante/(double)partidosJugadosVisitante)*100.0)/100.0;
+			Double af_r = Math.round((af/promedioGolesEnContraLocal)*100.0)/100.0;
+			
+			
+			
+			
+			Integer golesEnContraLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
+					.getGroups().stream().findFirst().get()
+					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
+					.getGoalsAgainst();
+					
+			
+			Double hc = Math.round(((double)golesEnContraLocal/(double)partidosJugadosLocal)*100.0)/100.0;
+			Double hc_r = Math.round((hc/promedioGolesEnContraLocal)*100.0)/100.0;
+			
+			Double golesEsperadosVisitante = Math.round((af_r * hc_r * promedioGolesEnContraLocal)*100.0)/100.0;
+			
+			request.setAttribute("Af", af);
+			request.setAttribute("Af_r", af_r);
+			request.setAttribute("promedioFavorVisitante", Math.round(promedioGolesEnContraLocal*100.0)/100.0);
+			
+									
+			
+			request.setAttribute("Hc", hc);
+			request.setAttribute("Hc_r", hc_r);
+			request.setAttribute("promedioEnContraLocal", Math.round(promedioGolesEnContraLocal*100.0)/100.0);
+			request.setAttribute("golesEsperadosEquipoVisitante", golesEsperadosVisitante);
+			
+			
+			
+			
+			
+			
+			
 			//request.setAttribute("golesEnContraLocal");
 			
 			//request.setAttribute("partidosJugadosLocal");
 			
-			request.setAttribute("promedioFavorLocal", promedioGolesFavorLocal);
+			
 			request.setAttribute("aPxPLocal", Math.round(((double)estadisticasLocal.getShotsOnTarget() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gFxPLocal", Math.round(((double)estadisticasLocal.getGoalsScored() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);
 			request.setAttribute("gCxPLocal", Math.round(((double)estadisticasLocal.getGoalsConceded() / (double)estadisticasLocal.getMatchesPlayed())*100.0)/100.0);

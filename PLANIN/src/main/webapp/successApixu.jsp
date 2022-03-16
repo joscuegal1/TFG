@@ -13,9 +13,15 @@
 <fieldset id="local">
 <legend>Equipo local:  <c:out value="${requestScope.nombreLocal}"/></legend>
 
-<h2><c:out value="${requestScope.Hf}"/> media de goles como local </h2>
-<h2><c:out value="${requestScope.Hf_r}"/> media de goles como local respecto al resto </h2>
-<h2><c:out value="${requestScope.promedioFavorLocal}"/> promedio goles locales </h2>
+<h2><c:out value="${requestScope.Hf}"/> media de goles a favor como local </h2>
+<h2><c:out value="${requestScope.Hf_r}"/> media de goles a favor como local respecto al resto </h2>
+<h2><c:out value="${requestScope.Hc}"/> media de goles en contra como loca</h2>
+<h2><c:out value="${requestScope.Hc_r}"/> media de goles en contra como local respecto al resto </h2>
+<h2><c:out value="${requestScope.promedioFavorLocal}"/> promedio goles a favor locales </h2>
+<h2><c:out value="${requestScope.promedioEnContraLocal}"/> promedio goles en contra locales </h2>
+<h2><c:out value="${requestScope.golesEsperadosEquipoLocal}"/> GOLES ESPERADOS POR EL EQUIPO LOCAL</h2>
+
+
 
 <h2> con un promedio de: </h2>
 <h2><c:out value="${requestScope.gFxPLocal}"/>  goles por partido a favor </h2> 
@@ -26,9 +32,13 @@
 <fieldset id="visitante">
 <legend>Equipo visitante: <c:out value="${requestScope.nombreVisitante}"/></legend>
 
-<h2><c:out value="${requestScope.golesAFavorVisitante}"/> goles a favor </h2>
-<h2><c:out value="${requestScope.golesEnContraVisitante}"/> goles en contra </h2>
-<h2><c:out value="${requestScope.aPuertaVisitante}"/> tiros a puerta a favor </h2>
+<h2><c:out value="${requestScope.Ac}"/> media de goles en contra como visitante </h2>
+<h2><c:out value="${requestScope.Ac_r}"/> media de goles en contra como visitante respecto al resto </h2>
+<h2><c:out value="${requestScope.Af}"/> media de goles a favor como visitante </h2>
+<h2><c:out value="${requestScope.Af_r}"/> media de goles a favor como visitante respecto al resto </h2>
+<h2><c:out value="${requestScope.promedioFavorVisitante}"/> promedio goles a favor visitante </h2>
+<h2><c:out value="${requestScope.promedioEnContraVisitante}"/> promedio goles en contra visitante </h2>
+<h2><c:out value="${requestScope.golesEsperadosEquipoVisitante}"/> GOLES ESPERADOS POR EL EQUIPO VISITANTE</h2>
 
 <h2> con un promedio de: </h2>
 <h2><c:out value="${requestScope.gFxPVisitante}"/>  goles por partido a favor </h2> 
