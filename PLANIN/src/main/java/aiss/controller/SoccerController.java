@@ -1,6 +1,8 @@
 package aiss.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -82,7 +84,7 @@ public class SoccerController extends HttpServlet {
 		
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
-			rd = request.getRequestDispatcher("/successApixu.jsp");
+			rd = request.getRequestDispatcher("/successSoccer.jsp");
 			
 			
 			String home = "home";
@@ -189,7 +191,59 @@ public class SoccerController extends HttpServlet {
 			
 			
 			
+			//------------------------------------------------------------------------------------------------------------//
 			
+			List<Double> poissonLocal = soccer.distPoissonPorGol(golesEsperadosLocal);
+			List<Double> poissonVisitante = soccer.distPoissonPorGol(golesEsperadosVisitante);
+			
+			
+		
+				Integer var = 100;
+				double[][] res = new double[11][11];
+				
+				for(int a = 0; a<poissonLocal.size(); a++) {
+					Double l = poissonLocal.get(a);
+					
+					for(int b = 0; b<poissonVisitante.size(); b++) {
+						Double v = poissonVisitante.get(b);
+						res[a][b] = (l*v)*var; 
+					}
+				}
+				
+				
+				Double homelocal = 0.0;
+				Double awayvisitante = 0.0;
+				Double draw = 0.0;
+
+				
+				for(int a = 0; a<poissonLocal.size(); a++) {
+					for(int b = 0; b<poissonVisitante.size(); b++) {
+						if(a==b) {
+							draw += res[a][b];
+						}if(a<b) {
+							awayvisitante += res[a][b];
+						}if(a>b) {
+							homelocal += res[a][b];
+						}
+						
+					}
+				}
+				
+				request.setAttribute("L", Math.round(homelocal*100.0)/100.0);
+				request.setAttribute("D", Math.round(draw*100.0)/100.0);
+				request.setAttribute("V", Math.round(awayvisitante*100.0)/100.0);
+				
+				
+				
+				
+			
+			
+			
+			
+			
+			
+			
+			request.setAttribute("prueba", (poissonLocal.get(1)*poissonVisitante.get(1))*100);
 			
 			
 			
@@ -219,6 +273,11 @@ public class SoccerController extends HttpServlet {
 		}
 		rd.forward(request, response);
 	}
+	
+
+	
+	
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

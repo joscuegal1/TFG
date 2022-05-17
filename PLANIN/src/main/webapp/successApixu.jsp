@@ -20,6 +20,9 @@
 <h2><c:out value="${requestScope.promedioFavorLocal}"/> promedio goles a favor locales </h2>
 <h2><c:out value="${requestScope.promedioEnContraLocal}"/> promedio goles en contra locales </h2>
 <h2><c:out value="${requestScope.golesEsperadosEquipoLocal}"/> GOLES ESPERADOS POR EL EQUIPO LOCAL</h2>
+<h2><c:out value="${requestScope.L}"/> LOCAL</h2>
+<h2><c:out value="${requestScope.D}"/> DRAW</h2>
+<h2><c:out value="${requestScope.V}"/> VISITANTE</h2>
 
 
 

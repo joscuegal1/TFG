@@ -2,6 +2,8 @@ package aiss.model.resource;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,5 +63,47 @@ public class SoccerResource {
 		return temporada;
 	
 	}
+	
+	
+	//------------------------------------------------------------------------------------
+	
+	public Integer getFactorial(Integer numero) {
+		  if (numero==0)
+		    return 1;
+		  else
+		    return numero * getFactorial(numero-1);
+		}
+	
+	public Double DistPoisson (Integer k, Double lambda) {
+		Double res = 0.0;
+		Double e = Math.E;
+		res = (Math.pow(e, -lambda) * Math.pow(lambda,k)) / getFactorial(k);
+		return res;		
+	}
+	
+	public List<Double> distPoissonPorGol(Double lambda){
+		List<Double> res = new ArrayList<Double>();
+		List<Integer> goles = new ArrayList<Integer>();
+		goles.add(0);
+		goles.add(1);
+		goles.add(2);
+		goles.add(3);
+		goles.add(4);
+		goles.add(5);
+		goles.add(6);
+		goles.add(7);
+		goles.add(8);
+		goles.add(9);
+		goles.add(10);
+		for(int i = 0; i<11; i++) {
+			Double p = DistPoisson(goles.get(i), lambda);
+			res.add(p);
+		}
+		return res;
+	}
+	
+	//--------------------------------------------------------------------------------------
+	
+	
 	
 }
