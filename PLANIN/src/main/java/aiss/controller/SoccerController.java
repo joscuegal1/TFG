@@ -19,12 +19,15 @@ import aiss.model.apixu.ElTiempo;
 import aiss.model.estadisticas.Estadisticas;
 import aiss.model.estadisticas.Statistics__1;
 import aiss.model.google.maps.PlaceNearbySearch;
+import aiss.model.racha.Racha;
 import aiss.model.resource.ApixuResource;
 import aiss.model.resource.GooglePlacesResource;
 import aiss.model.resource.SoccerResource;
 import aiss.model.soccer.Competitor;
 import aiss.model.soccer.Equipo;
 import aiss.model.temporada.Temporada;
+import aiss.model.versus.LastMeeting;
+import aiss.model.versus.Versus;
 
 /**
  * Servlet implementation class SearchController
@@ -191,7 +194,7 @@ public class SoccerController extends HttpServlet {
 			
 			
 			
-			//------------------------------------------------------------------------------------------------------------//
+			//-------------------------------DISTRIBUCIÓN POISSON-----------------------------------------------------------------------------//
 			
 			List<Double> poissonLocal = soccer.distPoissonPorGol(golesEsperadosLocal);
 			List<Double> poissonVisitante = soccer.distPoissonPorGol(golesEsperadosVisitante);
@@ -232,12 +235,63 @@ public class SoccerController extends HttpServlet {
 				request.setAttribute("L", Math.round(homelocal*100.0)/100.0);
 				request.setAttribute("D", Math.round(draw*100.0)/100.0);
 				request.setAttribute("V", Math.round(awayvisitante*100.0)/100.0);
-				
-				
-				
-				
 			
 			
+		//--------------------------------------HISTORIAL ENTRE 2 EQUIPOS------------------------------------------------------
+				
+				Versus versus = soccer.getVersus(local, visitante);
+				List<LastMeeting> ultimosEnfrentamientos = versus.getLastMeetings();
+				
+				Integer victoriasLocal = 0;
+				Integer victoriasVisitante = 0;
+				String idLocal = "sr:competitor:" + local;
+				String idVisitante ="sr:competitor:" + visitante;
+				
+				Integer numPartidos = 0;
+				
+				Integer empates = 0;
+				
+				for(int i = 0; i < ultimosEnfrentamientos.size();i++) {
+				
+					if(ultimosEnfrentamientos.get(i).getSportEventStatus().getMatchStatus().equals("ended")) {
+						 numPartidos++;
+						
+						if(! ultimosEnfrentamientos.get(i).getSportEventStatus().getHomeScore().equals(ultimosEnfrentamientos.get(i).getSportEventStatus().getAwayScore())) {
+							
+							String ganadorUltPartido = ultimosEnfrentamientos.get(i).getSportEventStatus().getWinnerId();
+							if(ganadorUltPartido.equals(idLocal)) {
+								victoriasLocal++;
+							}
+							if(ganadorUltPartido.equals(idVisitante)) {
+								victoriasVisitante++;
+							}
+						}else {
+							empates++;
+						}
+					}
+				}
+				
+				
+				Double porcentajeVictoriaLocal =  Math.round(((double)victoriasLocal/(double)numPartidos)*100.0)/100.0  ;
+				Double porcentajeVictoriaVisitante = Math.round(((double)victoriasVisitante/(double)numPartidos)*100.0)/100.0  ;
+				Double porcentajeEmpates =  Math.round(((double)empates/(double)numPartidos)*100.0)/100.0  ;
+				
+				
+				
+				request.setAttribute("victoriasLocal", victoriasLocal);
+				request.setAttribute("victoriasVisitante", victoriasVisitante);
+				request.setAttribute("empates", empates);
+				request.setAttribute("partidosTotales", numPartidos);
+				
+				request.setAttribute("porcentajeVictoriaLocal", porcentajeVictoriaLocal);
+				request.setAttribute("porcentajeVictoriaVisitante", porcentajeVictoriaVisitante);
+				request.setAttribute("porcentajeEmpates", porcentajeEmpates);
+				
+		//---------------------------------RACHA ÚLTIMOS PARTIDOS--------------------------------------------		
+				
+			
+				Racha rachaLocal = soccer.getRacha(local);
+				Racha rachaVisitante = soccer.getRacha(visitante);
 			
 			
 			

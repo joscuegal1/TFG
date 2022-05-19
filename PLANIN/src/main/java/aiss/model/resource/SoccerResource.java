@@ -11,9 +11,11 @@ import org.restlet.resource.ClientResource;
 
 import aiss.model.apixu.ElTiempo;
 import aiss.model.estadisticas.Estadisticas;
+import aiss.model.racha.Racha;
 import aiss.model.soccer.Competitor;
 import aiss.model.soccer.Equipo;
 import aiss.model.temporada.Temporada;
+import aiss.model.versus.Versus;
 
 
 
@@ -104,6 +106,41 @@ public class SoccerResource {
 	
 	//--------------------------------------------------------------------------------------
 	
+	
+	public Versus getVersus(String competitorId1, String competitorId2) throws UnsupportedEncodingException{
+		
+		String equipo1 = URLEncoder.encode(competitorId1, "UTF-8");
+		String equipo2 = URLEncoder.encode(competitorId2, "UTF-8");
+				
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo1 + "/versus/sr:competitor:" + equipo2 + "/summaries.xml?api_key=" + SOCCER_API_KEY;
+		
+		log.log(Level.FINE, "SoccerURI: " + uri);
+		ClientResource cr= new ClientResource(uri);
+		
+		Versus versus = cr.get(Versus.class);
+		return versus;
+	
+	}
+	
+	
+	public Racha getRacha(String competitorId) throws UnsupportedEncodingException{
+		
+		String equipo = URLEncoder.encode(competitorId, "UTF-8");
+
+				
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo + "/summaries.xml?api_key=" + SOCCER_API_KEY;
+		
+		log.log(Level.FINE, "SoccerURI: " + uri);
+		ClientResource cr= new ClientResource(uri);
+		
+		Racha racha = cr.get(Racha.class);
+		return racha;
+	
+	}
+	
+	
+	
+
 	
 	
 }

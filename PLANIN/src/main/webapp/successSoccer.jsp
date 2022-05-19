@@ -15,6 +15,15 @@
 <h2><c:out value="${requestScope.D}"/>% DRAW</h2>
 <h2><c:out value="${requestScope.V}"/>% VISITANTE</h2>
 
+<h3><c:out value="${requestScope.victoriasLocal}"/> victorias Local</h3>
+<h3><c:out value="${requestScope.victoriasVisitante}"/> victorias Visitante</h3>
+<h3><c:out value="${requestScope.empates}"/> empates</h3>
+<h3><c:out value="${requestScope.partidosTotales}"/> total ultimos partidos</h3>
+
+<h4><c:out value="${requestScope.porcentajeVictoriaLocal}"/>% local</h4>
+<h4><c:out value="${requestScope.porcentajeVictoriaVisitante}"/>% visitante</h4>
+<h4><c:out value="${requestScope.porcentajeEmpates}"/>% empates</h4>
+
 
 
 
