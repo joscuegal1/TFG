@@ -112,7 +112,7 @@ public class SoccerResource {
 		String equipo1 = URLEncoder.encode(competitorId1, "UTF-8");
 		String equipo2 = URLEncoder.encode(competitorId2, "UTF-8");
 				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo1 + "/versus/sr:competitor:" + equipo2 + "/summaries.xml?api_key=" + SOCCER_API_KEY;
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo1 + "/versus/sr:competitor:" + equipo2 + "/summaries.json?api_key=" + SOCCER_API_KEY;
 		
 		log.log(Level.FINE, "SoccerURI: " + uri);
 		ClientResource cr= new ClientResource(uri);
@@ -128,7 +128,7 @@ public class SoccerResource {
 		String equipo = URLEncoder.encode(competitorId, "UTF-8");
 
 				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo + "/summaries.xml?api_key=" + SOCCER_API_KEY;
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo + "/summaries.json?api_key=" + SOCCER_API_KEY;
 		
 		log.log(Level.FINE, "SoccerURI: " + uri);
 		ClientResource cr= new ClientResource(uri);
@@ -137,6 +137,8 @@ public class SoccerResource {
 		return racha;
 	
 	}
+	
+	
 	
 	
 	

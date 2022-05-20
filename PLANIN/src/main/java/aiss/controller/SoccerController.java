@@ -20,6 +20,8 @@ import aiss.model.estadisticas.Estadisticas;
 import aiss.model.estadisticas.Statistics__1;
 import aiss.model.google.maps.PlaceNearbySearch;
 import aiss.model.racha.Racha;
+import aiss.model.racha.SportEventStatus;
+import aiss.model.racha.Summary;
 import aiss.model.resource.ApixuResource;
 import aiss.model.resource.GooglePlacesResource;
 import aiss.model.resource.SoccerResource;
@@ -232,9 +234,13 @@ public class SoccerController extends HttpServlet {
 					}
 				}
 				
-				request.setAttribute("L", Math.round(homelocal*100.0)/100.0);
-				request.setAttribute("D", Math.round(draw*100.0)/100.0);
-				request.setAttribute("V", Math.round(awayvisitante*100.0)/100.0);
+				homelocal = Math.round(homelocal*100.0)/100.0;
+				draw = Math.round(draw*100.0)/100.0;
+				awayvisitante = Math.round(awayvisitante*100.0)/100.0;
+				
+				request.setAttribute("L", homelocal);
+				request.setAttribute("D", draw);
+				request.setAttribute("V", awayvisitante);
 			
 			
 		//--------------------------------------HISTORIAL ENTRE 2 EQUIPOS------------------------------------------------------
@@ -272,9 +278,9 @@ public class SoccerController extends HttpServlet {
 				}
 				
 				
-				Double porcentajeVictoriaLocal =  Math.round(((double)victoriasLocal/(double)numPartidos)*100.0)/100.0  ;
-				Double porcentajeVictoriaVisitante = Math.round(((double)victoriasVisitante/(double)numPartidos)*100.0)/100.0  ;
-				Double porcentajeEmpates =  Math.round(((double)empates/(double)numPartidos)*100.0)/100.0  ;
+				Double porcentajeVictoriaLocal =  Math.round(((double)victoriasLocal/(double)numPartidos)*10000.0)/100.0  ;
+				Double porcentajeVictoriaVisitante = Math.round(((double)victoriasVisitante/(double)numPartidos)*10000.0)/100.0  ;
+				Double porcentajeEmpates =  Math.round(((double)empates/(double)numPartidos)*10000.0)/100.0  ;
 				
 				
 				
@@ -291,16 +297,99 @@ public class SoccerController extends HttpServlet {
 				
 			
 				Racha rachaLocal = soccer.getRacha(local);
+				
+				try
+				{
+				    Thread.sleep(2000);
+				}
+				catch(InterruptedException ex)
+				{
+				    Thread.currentThread().interrupt();
+				}
+				
 				Racha rachaVisitante = soccer.getRacha(visitante);
+				
+				List<Summary> sumariesLocal = rachaLocal.getSummaries();
+				List<Summary> sumariesVisitante = rachaVisitante.getSummaries();
+				
+				Integer rachaVictoriasLocal = 0;
+				Integer rachaVictoriasVisitante = 0;
+				
+				Integer rachaEmpatesLocal = 0;
+				Integer rachaEmpatesVisitante = 0;
+				
+				Integer rachaDerrotasLocal = 0;
+				Integer rachaDerrotasVisitante = 0;
+				
+				
+				for(int i = 0; i < 5; i++) {
+						
+						if(! sumariesLocal.get(i).getSportEventStatus().getHomeScore().equals(sumariesLocal.get(i).getSportEventStatus().getAwayScore())) {
+							
+							String ganadorUltPartido = sumariesLocal.get(i).getSportEventStatus().getWinnerId();
+							if(ganadorUltPartido.equals(idLocal)) {
+								rachaVictoriasLocal++;
+							}else {
+								rachaDerrotasLocal++;
+							}
+						}else {
+							rachaEmpatesLocal++;
+						}
+				}
 			
-			
-			
-			
-			
-			request.setAttribute("prueba", (poissonLocal.get(1)*poissonVisitante.get(1))*100);
-			
-			
-			
+				
+				request.setAttribute("rachaVictoriasLocal", rachaVictoriasLocal);
+				request.setAttribute("rachaEmpatesLocal", rachaEmpatesLocal);
+				request.setAttribute("rachaDerrotasLocal", rachaDerrotasLocal);
+				
+				
+				for(int i = 0; i < 5; i++) {
+					
+					if(! sumariesVisitante.get(i).getSportEventStatus().getHomeScore().equals(sumariesVisitante.get(i).getSportEventStatus().getAwayScore())) {
+						
+						String ganadorUltPartido = sumariesVisitante.get(i).getSportEventStatus().getWinnerId();
+						if(ganadorUltPartido.equals(idVisitante)) {
+							rachaVictoriasVisitante++;
+						}else {
+							rachaDerrotasVisitante++;
+						}
+					}else {
+						rachaEmpatesVisitante++;
+					}
+			}
+				
+				request.setAttribute("rachaVictoriasVisitante", rachaVictoriasVisitante);
+				request.setAttribute("rachaEmpatesVisitante", rachaEmpatesVisitante);
+				request.setAttribute("rachaDerrotasVisitante", rachaDerrotasVisitante);
+				
+				
+				Double combinadoLocal = (rachaVictoriasLocal + rachaDerrotasVisitante) * 10.0;
+				Double combinadoEmpate = (rachaEmpatesLocal + rachaEmpatesVisitante) * 10.0;
+				Double combinadoVisitante = (rachaDerrotasLocal + rachaVictoriasVisitante) * 10.0;
+				
+				
+				request.setAttribute("combinadoLocal", combinadoLocal);
+				request.setAttribute("combinadoEmpate", combinadoEmpate);
+				request.setAttribute("combinadoVisitante", combinadoVisitante);
+				
+		//---------------------------------PREDICCIÓN FINAL----------------------------------------
+				
+				Double pesoPoisson = 0.8;
+				Double pesoHistorico = 0.1;
+				Double pesoRacha = 0.1;
+				
+				Double localPrediction = pesoPoisson * homelocal + pesoHistorico * porcentajeVictoriaLocal + pesoRacha * combinadoLocal;
+				Double drawPrediction = pesoPoisson * draw + pesoHistorico * porcentajeEmpates + pesoRacha * combinadoEmpate;
+				Double visitantePrediction = pesoPoisson * awayvisitante + pesoHistorico * porcentajeVictoriaVisitante + pesoRacha * combinadoVisitante;
+				
+				request.setAttribute("LocalPrediction", localPrediction);
+				request.setAttribute("DrawPrediction", drawPrediction);
+				request.setAttribute("VisitantePrediction", visitantePrediction);
+				
+				
+				
+				
+						
 			//request.setAttribute("golesEnContraLocal");
 			
 			//request.setAttribute("partidosJugadosLocal");
