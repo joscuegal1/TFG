@@ -382,6 +382,10 @@ public class SoccerController extends HttpServlet {
 				Double drawPrediction = pesoPoisson * draw + pesoHistorico * porcentajeEmpates + pesoRacha * combinadoEmpate;
 				Double visitantePrediction = pesoPoisson * awayvisitante + pesoHistorico * porcentajeVictoriaVisitante + pesoRacha * combinadoVisitante;
 				
+				localPrediction = Math.round(localPrediction*100.0)/100.0;
+				drawPrediction = Math.round(drawPrediction*100.0)/100.0;
+				visitantePrediction = Math.round(visitantePrediction*100.0)/100.0;
+				
 				request.setAttribute("LocalPrediction", localPrediction);
 				request.setAttribute("DrawPrediction", drawPrediction);
 				request.setAttribute("VisitantePrediction", visitantePrediction);
