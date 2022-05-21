@@ -89,7 +89,7 @@ public class SoccerController extends HttpServlet {
 		
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
-			rd = request.getRequestDispatcher("/successSoccer.jsp");
+			rd = request.getRequestDispatcher("/successGOD.jsp");
 			
 			
 			String home = "home";

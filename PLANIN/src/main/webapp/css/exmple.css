@@ -1,0 +1,100 @@
+@charset "ISO-8859-1";
+
+element.style {
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.imso-medium-font {
+    font-family: arial,sans-serif-medium,sans-serif;
+    font-weight: normal;
+}
+.liveresults-sports-immersive__lr-imso-ss-wp {
+    border-collapse: collapse;
+    color: #202124;
+    font-size: 12px;
+    line-height: 20px;
+}
+.OiT5Ue {
+    -webkit-user-select: none;
+    user-select: none;
+}
+.NJfJb {
+    border-radius: 8px;
+    border-radius: 8px;
+    display: inline-block;
+    z-index: 9999;
+    background-color: #fff;
+    opacity: 0;
+    white-space: normal;
+    overflow: hidden;
+    box-shadow: 0px 5px 26px 0px rgb(0 0 0 / 22%), 0px 20px 28px 0px rgb(0 0 0 / 30%);
+}
+.TUOsUe {
+    text-align: left;
+}
+.bErdLd.wwYr3 {
+    text-align: center;
+}
+.bErdLd.aID8W {
+    opacity: 1;
+    visibility: inherit;
+}
+.bErdLd {
+    -webkit-tap-highlight-color: rgba(0,0,0,0.0);
+}
+.bErdLd {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    vertical-align: middle;
+    visibility: hidden;
+    white-space: nowrap;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+style attribute {
+    visibility: visible;
+}
+.e9EfHf {
+    font-family: arial,sans-serif;
+    clear: both;
+    margin-left: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+}
+
+.srp {
+    --rhs-margin: 44px;
+}
+
+.srp {
+    --center-abs-margin: 28px;
+}
+.srp {
+    --center-abs-margin: 180px;
+    --center-column-margin: var(--center-abs-margin);
+    --center-width: 652px;
+    --center-column-width: var(--center-width);
+    --rhs-margin: 60px;
+    --rhs-width: 369px;
+}
+body {
+    margin: 0;
+    background: #fff;
+    color: #202124;
+}
+body, h1 {
+    font-size: 14px;
+}
+html, body, h1, input, select {
+    font-family: arial,sans-serif;
+}
