@@ -11,21 +11,7 @@
 <body>
 
 <div>
-<table class="liveresults-sports-immersive__lr-imso-ss-wp-tnp">
-	<tbody>
-	<tr class="liveresults-sports-immersive__lr-imso-ss-wp-tnr">
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-ft">Local</td>
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-d">Empate</td>
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-st">Visitante</td>
-	</tr>
-	
-	<tr class="liveresults-sports-immersive__lr-imso-ss-wp-tp">
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-ft" style="color:#ff4b13"><c:out value="${requestScope.LocalPrediction}"/>%</td>
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-dp"><c:out value="${requestScope.DrawPrediction}"/>%</td>
-		<td class="liveresults-sports-immersive__lr-imso-ss-wp-st" style="color:#8BB9E5"><c:out value="${requestScope.VisitantePrediction}"/>%</td>
-	</tr>
-	</tbody>
-</table>
+
 
 <table class="liveresults-sports-immersive__lr-imso-ss-wp-b">
 	<tbody>
