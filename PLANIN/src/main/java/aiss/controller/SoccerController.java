@@ -89,7 +89,7 @@ public class SoccerController extends HttpServlet {
 		
 
 		if (competitorLocal!=null && competitorVisitante!=null && !(competitorLocal.getCompetitor().getId()==competitorVisitante.getCompetitor().getId())){
-			rd = request.getRequestDispatcher("/successGOD.jsp");
+			rd = request.getRequestDispatcher("/successSoccer.jsp");
 			
 			
 			String home = "home";
@@ -244,7 +244,14 @@ public class SoccerController extends HttpServlet {
 			
 			
 		//--------------------------------------HISTORIAL ENTRE 2 EQUIPOS------------------------------------------------------
-				
+				try
+				{
+				    Thread.sleep(2000);
+				}
+				catch(InterruptedException ex)
+				{
+				    Thread.currentThread().interrupt();
+				}
 				Versus versus = soccer.getVersus(local, visitante);
 				List<LastMeeting> ultimosEnfrentamientos = versus.getLastMeetings();
 				

@@ -8,6 +8,8 @@
 
 <body>
 
+
+
 <div class= "main">
 <h1 class="centerup"> Predice</h1>
 </div>
@@ -16,8 +18,8 @@
   
   <div class="center">
   		
- 		<img src="escudos/fondo.png" width="128" height="96" border="0" name="ImagenLocal" HSPACE="10">
- 		<img src="escudos/fondo.png" width="128" height="96" border="0" name="ImagenVisitante" HSPACE="20">
+ 		<img src="escudos/fondo.png" width="200" height="150" border="0" name="ImagenLocal" HSPACE="100">
+ 		<img src="escudos/fondo.png" width="200" height="150" border="0" name="ImagenVisitante" HSPACE="100">
  	
  	<script>
 		var _img = new Array();
@@ -67,6 +69,8 @@
  	
  		
 		<form id="searchForm" name="searchForm" action="SoccerController" onsubmit="return validarFormulario()" method="post">
+		
+		<div class="select">
 		<select required name="Local" onchange="cambiarALocal(this)">
    			<option value="" disabled selected hidden>Equipo Local</option>
    			<option value="2829">Real Madrid CF</option> 
@@ -90,7 +94,8 @@
    			<option value="2885">Deportivo Alavés</option> 
    			<option value="2849">Levante UD</option>    
 		</select>
-		
+		</div>
+		<div class="select2">
 		<select required name="Visitante" onchange="cambiarAVisitante(this)">
 			<option value="" disabled selected hidden>Equipo Visitante</option>
    			<option value="2829">Real Madrid CF</option> 
@@ -114,8 +119,9 @@
    			<option value="2885">Deportivo Alavés</option> 
    			<option value="2849">Levante UD</option>    
 		</select>
+		</div>
 		
-		<input type="submit" name="searchBtn" title="search" value="Escoger">
+		<input type="submit" name="searchBtn" value="Predecir">
 		</form>
   
   

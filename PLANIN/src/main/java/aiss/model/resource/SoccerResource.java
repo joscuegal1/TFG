@@ -22,7 +22,7 @@ import aiss.model.versus.Versus;
 
 public class SoccerResource {
 
-	private static final String SOCCER_API_KEY = "2jk92tej6gh49ccvxm68awvp";  // TODO: Change this API KEY for your personal Key
+	private static final String SOCCER_API_KEY = "6c7vnp5mx6fn87fy5xjgq7y4";  // TODO: Change this API KEY for your personal Key
 	private static final Logger log = Logger.getLogger(SoccerResource.class.getName());
 	
 	public  Equipo getCompetitor(String query) throws UnsupportedEncodingException {

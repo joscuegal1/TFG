@@ -1,16 +1,20 @@
 @charset "ISO-8859-1";
 
 body{
-     margin: 25px;
+    
+	background-color: #23b499;;
 }
 
 
 h1 {
   font-size: 2em;
   font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: left;
+  color: white;
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
 }
 
 #searchDiv {
@@ -41,9 +45,11 @@ legend {
 
 .liveresults-sports-immersive__lr-imso-ss-wp-br {
     height: 8px;
+ 
 }
 .liveresults-sports-immersive__lr-imso-ss-wp-b {
   width: 50%;
+  text-align:center;
 }
 
 
