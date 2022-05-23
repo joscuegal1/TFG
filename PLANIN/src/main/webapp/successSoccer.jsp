@@ -11,11 +11,13 @@
 <body>
 
 <center>
-<h1>PREDICCIÓN FINAL</h1>
+<p>PREDICCIÓN FINAL</p>
 
-<h3><c:out value="${requestScope.LocalPrediction}"/>% LOCAL</h3>
-<h3><c:out value="${requestScope.DrawPrediction}"/>% EMPATE</h3>
-<h3><c:out value="${requestScope.VisitantePrediction}"/>% VISITANTE</h3>
+<h2 style="color:white; background:#ff4b13"><c:out value="${requestScope.LocalPrediction}"/>% PROBABILIDAD DE VICTORIA <c:out value="${requestScope.nombreLocal}"/></h2>
+<br>
+<h2 style="color:black; background:#D6D6D6"><c:out value="${requestScope.DrawPrediction}"/>% PROBABILIDAD DE EMPATE</h2>
+<br>
+<h2 style="color:white; background:#1a5276"><c:out value="${requestScope.VisitantePrediction}"/>% PROBABILIDAD DE VICTORIA <c:out value="${requestScope.nombreVisitante}"/></h2>
 
 <div>
 
@@ -31,11 +33,13 @@
 </table>
 </div>
 
-<h1>PROBABILIDAD DE POISSON</h1>
+<br>
+<br>
+<p>LA PROBABILIDAD DE POISSON APORTA UN PESO DEL <c:out value="${requestScope.pesoPoisson}"/>%</p>
 
-<h3><c:out value="${requestScope.L}"/>% LOCAL</h3>
-<h3><c:out value="${requestScope.D}"/>% EMPATE</h3>
-<h3><c:out value="${requestScope.V}"/>% VISITANTE</h3>
+<h3><c:out value="${requestScope.L}"/>% probabilidad de victoria local</h3>
+<h3><c:out value="${requestScope.D}"/>% probabilidad de empate</h3>
+<h3><c:out value="${requestScope.V}"/>% probabilidad de victoria visitante</h3>
 
 <div>
 <table class="liveresults-sports-immersive__lr-imso-ss-wp-b">
@@ -49,11 +53,13 @@
 </table>
 </div>
 
-<h1>HISTÓRICO ENTRE AMBOS ÚLTIMOS <c:out value="${requestScope.partidosTotales}"/> PARTIDOS</h1>
+<br>
+<br>
+<p>EL HISTÓRICO ENTRE AMBOS ÚLTIMOS <c:out value="${requestScope.partidosTotales}"/> PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoHistorico}"/>%</p>
 
-<h3><c:out value="${requestScope.porcentajeVictoriaLocal}"/>%  victorias Local</h3>
+<h3><c:out value="${requestScope.porcentajeVictoriaLocal}"/>%  victorias del local</h3>
 <h3><c:out value="${requestScope.porcentajeEmpates}"/>% empates</h3>
-<h3><c:out value="${requestScope.porcentajeVictoriaVisitante}"/>% victorias Visitante</h3>
+<h3><c:out value="${requestScope.porcentajeVictoriaVisitante}"/>% victorias del visitante</h3>
 
 <div>
 <table class="liveresults-sports-immersive__lr-imso-ss-wp-b">
@@ -67,7 +73,10 @@
 </table>
 </div>
 
-<h1>RACHA COMBINADA ÚLTIMOS 5 PARTIDOS </h1>
+<br>
+<br>
+
+<p>LA RACHA COMBINADA ÚLTIMOS 5 PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoRacha}"/>%</p>
 
 <h3><c:out value="${requestScope.combinadoLocal}"/>% racha local últimos partidos</h3>
 <h3><c:out value="${requestScope.combinadoEmpate}"/>% racha empate últimos partidos</h3>
@@ -84,6 +93,9 @@
 	</tbody>
 </table>
 </div>
+
+<br>
+<br>
 </center>
 </body>
 

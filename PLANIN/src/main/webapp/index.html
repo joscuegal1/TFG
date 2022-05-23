@@ -120,6 +120,14 @@
    			<option value="2849">Levante UD</option>    
 		</select>
 		</div>
+			<div class="select3">
+		<select required name="Pesos" onchange="cambiarAPesos(this)">
+			<option value="0" disabled selected hidden>Elegir pesos</option>
+   			<option value="1" title="(Opción recomendada) Aporta un 80% del peso a la distribución de Poisson, y un 10% a las otras 2">Fuerza temporada</option> 
+   			<option value="2" title="Aporta un 60% del peso a los resultados históricos entre ambos, y un 20% a las otras 2">Histórico de ambos</option> 
+   			<option value="3" title="Aporta un 60% del peso a la racha actual de cada uno, y un 20% a las otras 2">Racha actual</option>
+		</select>
+		</div>
 		
 		<input type="submit" name="searchBtn" value="Predecir">
 		</form>
@@ -131,8 +139,13 @@
 function validarFormulario() {
 	var local = document.forms["searchForm"]["Local"].selectedIndex;
 	var visitante = document.forms["searchForm"]["Visitante"].selectedIndex;
+	var peso = document.forms["searchForm"]["Pesos"].selectedIndex;
 	if( local == visitante) {
 		alert("¡No se pueden enfrentar dos equipos iguales! Elige dos equipos distintos.");
+		return false;					
+	}
+	if( peso == 0) {
+		alert("Elige un peso");
 		return false;					
 	}
 }
