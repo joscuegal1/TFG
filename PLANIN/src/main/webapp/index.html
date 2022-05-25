@@ -120,6 +120,8 @@
    			<option value="2849">Levante UD</option>    
 		</select>
 		</div>
+
+<!--  
 			<div class="select3">
 		<select required name="Pesos" onchange="cambiarAPesos(this)">
 			<option value="0" disabled selected hidden>Elegir pesos</option>
@@ -128,10 +130,24 @@
    			<option value="3" title="Aporta un 60% del peso a la racha actual de cada uno, y un 20% a las otras 2">Racha actual</option>
 		</select>
 		</div>
+--> 	 
+
+		<input name="Poisson" type="range" value="80" min="0" max="100" id="range1" oninput="rangenumber1.value=value"/ class="peso1" style="background-size: 80% 100%;">
+  		<input type="number" id="rangenumber1" min="0" max="100" value="80" oninput="range1.value=value" class="peso1b">
+		<label for="Poisson" style="position: absolute;top: 165%;left:10%;">Peso del rendimiento de la temporada</label>
 		
-		<input type="submit" name="searchBtn" value="Predecir">
+		<input name="Versus" type="range" value="10" min="0" max="100" id="range2" oninput="rangenumber2.value=value"/ class="peso2" style="background-size: 10% 100%;">
+  		<input type="number" id="rangenumber2" min="0" max="100" value="10" oninput="range2.value=value" class="peso2b">
+  		<label for="Versus" style="position: absolute;top: 165%;left:40%;">Peso del histórico entre ambos</label>
+  		
+  		<input name="Racha" type="range" value="10" min="0" max="100" id="range3" oninput="rangenumber3.value=value"/ class="peso3" style="background-size: 10% 100%;">
+  		<input type="number" id="rangenumber3" min="0" max="100" value="10" oninput="range3.value=value" class="peso3b">
+		<label for="Racha" style="position: absolute;top: 165%;left:67%;">Peso de la racha actual de ambos</label>
+
+		
+		<input type="submit" name="searchBtn" value="Predecir" class="predecir">
 		</form>
-  
+
   
   
   
@@ -139,19 +155,45 @@
 function validarFormulario() {
 	var local = document.forms["searchForm"]["Local"].selectedIndex;
 	var visitante = document.forms["searchForm"]["Visitante"].selectedIndex;
-	var peso = document.forms["searchForm"]["Pesos"].selectedIndex;
+	var peso1 = document.getElementById('range1').value;
+	var peso2 = document.getElementById('range2').value;
+	var peso3 = document.getElementById('range3').value;
+	 total = parseInt(peso1) + parseInt(peso2) + parseInt(peso3);
 	if( local == visitante) {
 		alert("¡No se pueden enfrentar dos equipos iguales! Elige dos equipos distintos.");
 		return false;					
 	}
-	if( peso == 0) {
-		alert("Elige un peso");
+	if( total != 100 ) {
+		alert("La suma de los pesos debe ser igual a 100 y actualmente es " +total );
 		return false;					
 	}
 }
 
 </script> 
   
+  		
+		<script>
+		const rangeInputs = document.querySelectorAll('input[type="range"]')
+const numberInput = document.querySelector('input[type="number"]')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== 'range') {
+    target = document.getElementById('range')
+  } 
+  const min = target.min
+  const max = target.max
+  const val = target.value
+  
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener('input', handleInputChange)
+})
+
+numberInput.addEventListener('input', handleInputChange)
+		</script>
   
   </div>
 

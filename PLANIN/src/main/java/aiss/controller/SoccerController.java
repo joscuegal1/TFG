@@ -55,7 +55,7 @@ public class SoccerController extends HttpServlet {
 		
 		String local = request.getParameter("Local");
 		String visitante = request.getParameter("Visitante");
-		String peso = request.getParameter("Pesos");
+		
 		RequestDispatcher rd = null;
 		
 		// Search for movies in OMDb
@@ -381,21 +381,10 @@ public class SoccerController extends HttpServlet {
 				request.setAttribute("combinadoVisitante", combinadoVisitante);
 				
 		//---------------------------------PREDICCIÓN FINAL----------------------------------------
-				Double pesoPoisson = 0.8;
-				Double pesoHistorico = 0.1;
-				Double pesoRacha = 0.1;
+				Double pesoPoisson = Double.valueOf(request.getParameter("Poisson"))/100.0;
+				Double pesoHistorico = Double.valueOf(request.getParameter("Versus"))/100.0;
+				Double pesoRacha = Double.valueOf(request.getParameter("Racha"))/100.0;
 				
-				if(peso.equals("2")) {
-					pesoPoisson = 0.2;
-					pesoHistorico = 0.6;
-					pesoRacha = 0.2;
-				}
-				
-				if(peso.equals("3")) {
-					pesoPoisson = 0.2;
-					pesoHistorico = 0.2;
-					pesoRacha = 0.6;
-					}
 				
 				Double localPrediction = pesoPoisson * homelocal + pesoHistorico * porcentajeVictoriaLocal + pesoRacha * combinadoLocal;
 				Double drawPrediction = pesoPoisson * draw + pesoHistorico * porcentajeEmpates + pesoRacha * combinadoEmpate;
@@ -409,9 +398,9 @@ public class SoccerController extends HttpServlet {
 				request.setAttribute("DrawPrediction", drawPrediction);
 				request.setAttribute("VisitantePrediction", visitantePrediction);
 				
-				request.setAttribute("pesoPoisson", pesoPoisson*100);
-				request.setAttribute("pesoHistorico", pesoHistorico*100);
-				request.setAttribute("pesoRacha", pesoRacha*100);
+				request.setAttribute("pesoPoisson", pesoPoisson*100.0);
+				request.setAttribute("pesoHistorico", pesoHistorico*100.0);
+				request.setAttribute("pesoRacha", pesoRacha*100.0);
 				
 				
 				
