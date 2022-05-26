@@ -35,7 +35,20 @@
 
 <br>
 <br>
-<p>LA PROBABILIDAD DE POISSON APORTA UN PESO DEL <c:out value="${requestScope.pesoPoisson}"/>%</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1 style= "font-size: 1.5em">Esta predicción global se basa en los siguientes parámetros ponderados con los siguientes pesos:</h1>
+
+<br>
+<br>
+<br>
+
+<h1>LA PROBABILIDAD DE POISSON APORTA UN PESO DEL <c:out value="${requestScope.pesoPoisson}"/>%</h1>
 
 <h3><c:out value="${requestScope.L}"/>% probabilidad de victoria local</h3>
 <h3><c:out value="${requestScope.D}"/>% probabilidad de empate</h3>
@@ -55,7 +68,7 @@
 
 <br>
 <br>
-<p>EL HISTÓRICO ENTRE AMBOS ÚLTIMOS <c:out value="${requestScope.partidosTotales}"/> PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoHistorico}"/>%</p>
+<h1>EL HISTÓRICO ENTRE AMBOS ÚLTIMOS <c:out value="${requestScope.partidosTotales}"/> PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoHistorico}"/>%</h1>
 
 <h3><c:out value="${requestScope.porcentajeVictoriaLocal}"/>%  victorias del local</h3>
 <h3><c:out value="${requestScope.porcentajeEmpates}"/>% empates</h3>
@@ -76,7 +89,7 @@
 <br>
 <br>
 
-<p>LA RACHA COMBINADA ÚLTIMOS 5 PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoRacha}"/>%</p>
+<h1>LA RACHA COMBINADA ÚLTIMOS 5 PARTIDOS APORTA UN PESO DEL <c:out value="${requestScope.pesoRacha}"/>%</h1>
 
 <h3><c:out value="${requestScope.combinadoLocal}"/>% racha local últimos partidos</h3>
 <h3><c:out value="${requestScope.combinadoEmpate}"/>% racha empate últimos partidos</h3>
