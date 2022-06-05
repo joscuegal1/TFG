@@ -41,27 +41,40 @@ public class SoccerResource {
 	
 	public Estadisticas getEstadisticas(String competitorId) throws UnsupportedEncodingException{
 		
+		// Aseguramos que la cadena de busqueda esta en el formato correcto
 		String equipo = URLEncoder.encode(competitorId, "UTF-8");
-				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:84048/competitors/sr:competitor:" + equipo + "/statistics.json?api_key=" + SOCCER_API_KEY;
 		
+		// Escribir url de busqueda para un equipo en concreto de la temporada actual
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:84048/competitors/sr:competitor:" 
+		+ equipo + "/statistics.json?api_key=" + SOCCER_API_KEY;
+		
+		//Añadimos un log
 		log.log(Level.FINE, "SoccerURI: " + uri);
+		
+		//Pedir al servicio RESTful el recurso que queremos en formato json
 		ClientResource cr= new ClientResource(uri);
 		
+		//Convertir dicho recurso a formato java
 		Estadisticas estadisticas = cr.get(Estadisticas.class);
+		
 		return estadisticas;
 	
 	}
 	
 	public Temporada getTemporada() throws UnsupportedEncodingException{
 		
-		
+		// Escribir url de busqueda para todas las estadisticas de la temporada actual
 		String uri = "https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:84048/standings.json?api_key=" + SOCCER_API_KEY;
 		
+		//Añadimos un log
 		log.log(Level.FINE, "SoccerURI: " + uri);
+		
+		//Pedir al servicio RESTful el recurso que queremos en formato json
 		ClientResource cr= new ClientResource(uri);
 		
+		//Convertir dicho recurso a formato java
 		Temporada temporada = cr.get(Temporada.class);
+		
 		return temporada;
 	
 	}
@@ -109,15 +122,23 @@ public class SoccerResource {
 	
 	public Versus getVersus(String competitorId1, String competitorId2) throws UnsupportedEncodingException{
 		
+		// Aseguramos que la cadena de busqueda esta en el formato correcto
 		String equipo1 = URLEncoder.encode(competitorId1, "UTF-8");
 		String equipo2 = URLEncoder.encode(competitorId2, "UTF-8");
-				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo1 + "/versus/sr:competitor:" + equipo2 + "/summaries.json?api_key=" + SOCCER_API_KEY;
 		
+		// Escribir url de busqueda para el historial de un equipo contra otro
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo1 + 
+				"/versus/sr:competitor:" + equipo2 + "/summaries.json?api_key=" + SOCCER_API_KEY;
+		
+		//Añadimos un log
 		log.log(Level.FINE, "SoccerURI: " + uri);
+		
+		//Pedir al servicio RESTful el recurso que queremos en formato json
 		ClientResource cr= new ClientResource(uri);
 		
+		//Convertir dicho recurso a formato java
 		Versus versus = cr.get(Versus.class);
+		
 		return versus;
 	
 	}
@@ -125,15 +146,22 @@ public class SoccerResource {
 	
 	public Racha getRacha(String competitorId) throws UnsupportedEncodingException{
 		
+		// Aseguramos que la cadena de busqueda esta en el formato correcto
 		String equipo = URLEncoder.encode(competitorId, "UTF-8");
 
-				
-		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:" + equipo + "/summaries.json?api_key=" + SOCCER_API_KEY;
+		// Escribir url de busqueda para la racha actual de un equipo
+		String uri = "https://api.sportradar.us/soccer/trial/v4/en/competitors/sr:competitor:"
+		+ equipo + "/summaries.json?api_key=" + SOCCER_API_KEY;
 		
+		//Añadimos un log
 		log.log(Level.FINE, "SoccerURI: " + uri);
+		
+		//Pedir al servicio RESTful el recurso que queremos en formato json
 		ClientResource cr= new ClientResource(uri);
 		
+		//Convertir dicho recurso a formato java
 		Racha racha = cr.get(Racha.class);
+		
 		return racha;
 	
 	}

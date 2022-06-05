@@ -58,8 +58,6 @@ public class SoccerController extends HttpServlet {
 		
 		RequestDispatcher rd = null;
 		
-		// Search for movies in OMDb
-		//log.log(Level.FINE, "Searching for OMDb movies that contain " + query);
 		SoccerResource soccer = new SoccerResource();
 		Estadisticas competitorLocal = soccer.getEstadisticas(local);
 		
