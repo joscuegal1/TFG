@@ -98,45 +98,53 @@ public class SoccerController extends HttpServlet {
 			Statistics__1 estadisticasLocal = competitorLocal.getCompetitor().getStatistics();
 			request.setAttribute("nombreLocal", competitorLocal.getCompetitor().getName());
 			
-			Integer golesAFavorLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-																.getGroups().stream().findFirst().get()
-																.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
-																.getGoalsFor();
+	Integer golesAFavorLocal = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(home)).findFirst().get()
+			.getGroups().stream().findFirst().get()
+			.getStandings().stream().filter(t -> t.getCompetitor()
+			.getId().equals(idlocal)).findFirst().get().getGoalsFor();
 			
-			Integer partidosJugadosLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
-					.getPlayed();
+	Integer partidosJugadosLocal = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(home)).findFirst().get()
+			.getGroups().stream().findFirst().get()
+			.getStandings().stream().filter(t -> t.getCompetitor()
+			.getId().equals(idlocal)).findFirst().get().getPlayed();
 			
 			
 				
-			Double promedioGolesFavorLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().mapToDouble(t -> (Math.round(((double)t.getGoalsFor() / (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
+	Double promedioGolesFavorLocal = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(home)).findFirst().get()
+			.getGroups().stream().findFirst().get().getStandings().stream()
+			.mapToDouble(t -> (Math.round(((double)t.getGoalsFor() 
+			/ (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
 		
 			//----------------------------------------------------------------------------------
 			
 			
-			Integer golesEnContraVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
-					.getGoalsAgainst();
+	Integer golesEnContraVisitante = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(away)).findFirst().get()
+			.getGroups().stream().findFirst().get()
+			.getStandings().stream().filter(t -> t.getCompetitor().getId()
+			.equals(idvisitante)).findFirst().get().getGoalsAgainst();
 			
-			Integer partidosJugadosVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
-					.getPlayed();
+	Integer partidosJugadosVisitante = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(away)).findFirst().get()
+			.getGroups().stream().findFirst().get()
+			.getStandings().stream().filter(t -> t.getCompetitor().getId()
+			.equals(idvisitante)).findFirst().get().getPlayed();
 			
 			//---------------------------------------------------------------------------
 			
+	Double hf = Math.round(((double)golesAFavorLocal
+			/(double)partidosJugadosLocal)*100.0)/100.0;
+	Double hf_r = Math.round((hf/promedioGolesFavorLocal)*100.0)/100.0;
 			
-			Double hf = Math.round(((double)golesAFavorLocal/(double)partidosJugadosLocal)*100.0)/100.0;
-			Double hf_r = Math.round((hf/promedioGolesFavorLocal)*100.0)/100.0;
+	Double ac = Math.round(((double)golesEnContraVisitante
+			/(double)partidosJugadosVisitante)*100.0)/100.0;
+	Double ac_r = Math.round((ac/promedioGolesFavorLocal)*100.0)/100.0;
 			
-			Double ac = Math.round(((double)golesEnContraVisitante/(double)partidosJugadosVisitante)*100.0)/100.0;
-			Double ac_r = Math.round((ac/promedioGolesFavorLocal)*100.0)/100.0;
-			
-			Double golesEsperadosLocal = Math.round((hf_r * ac_r * promedioGolesFavorLocal)*100.0)/100.0;
+	Double golesEsperadosLocal = Math.round((hf_r * ac_r * promedioGolesFavorLocal)
+			*100.0)/100.0;
 			
 			
 			request.setAttribute("Hf", hf);
@@ -152,35 +160,34 @@ public class SoccerController extends HttpServlet {
 	//--------------------------VISITANTE-----------------------------------------------
 			
 			
-			Integer golesEnAFavorVisitante = temporada.getStandings().stream().filter(t -> t.getType().equals(away)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idvisitante)).findFirst().get()
-					.getGoalsFor();
+	Integer golesEnAFavorVisitante = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(away)).findFirst().get()
+			.getGroups().stream().findFirst().get().getStandings()
+			.stream().filter(t -> t.getCompetitor().getId()
+			.equals(idvisitante)).findFirst().get().getGoalsFor();
 			
-			Double promedioGolesEnContraLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().mapToDouble(t -> (Math.round(((double)t.getGoalsAgainst() / (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
+	Double promedioGolesEnContraLocal = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(home)).findFirst().get()
+			.getGroups().stream().findFirst().get().getStandings().stream()
+			.mapToDouble(t -> (Math.round(((double)t.getGoalsAgainst() 
+			/ (double)t.getPlayed())*100.0)/100.0)).average().orElse(0);  
 		
-	
+	Double af = Math.round(((double)golesEnAFavorVisitante/
+			(double)partidosJugadosVisitante)*100.0)/100.0;
+	Double af_r = Math.round((af/promedioGolesEnContraLocal)*100.0)/100.0;
 			
-			
-						
-			Double af = Math.round(((double)golesEnAFavorVisitante/(double)partidosJugadosVisitante)*100.0)/100.0;
-			Double af_r = Math.round((af/promedioGolesEnContraLocal)*100.0)/100.0;
-			
-			
-			
-			
-			Integer golesEnContraLocal = temporada.getStandings().stream().filter(t -> t.getType().equals(home)).findFirst().get()
-					.getGroups().stream().findFirst().get()
-					.getStandings().stream().filter(t -> t.getCompetitor().getId().equals(idlocal)).findFirst().get()
-					.getGoalsAgainst();
+	Integer golesEnContraLocal = temporada.getStandings().stream()
+			.filter(t -> t.getType().equals(home)).findFirst().get()
+			.getGroups().stream().findFirst().get().getStandings().stream()
+			.filter(t -> t.getCompetitor().getId().equals(idlocal))
+			.findFirst().get().getGoalsAgainst();
 					
-			
-			Double hc = Math.round(((double)golesEnContraLocal/(double)partidosJugadosLocal)*100.0)/100.0;
-			Double hc_r = Math.round((hc/promedioGolesEnContraLocal)*100.0)/100.0;
-			
-			Double golesEsperadosVisitante = Math.round((af_r * hc_r * promedioGolesEnContraLocal)*100.0)/100.0;
+	Double hc = Math.round(((double)golesEnContraLocal/
+			(double)partidosJugadosLocal)*100.0)/100.0;
+	Double hc_r = Math.round((hc/promedioGolesEnContraLocal)*100.0)/100.0;
+	
+	Double golesEsperadosVisitante = Math.round((af_r * hc_r 
+			* promedioGolesEnContraLocal)*100.0)/100.0;
 			
 			request.setAttribute("Af", af);
 			request.setAttribute("Af_r", af_r);
@@ -197,41 +204,37 @@ public class SoccerController extends HttpServlet {
 			
 			//-------------------------------DISTRIBUCIÓN POISSON-----------------------------------------------------------------------------//
 			
-			List<Double> poissonLocal = soccer.distPoissonPorGol(golesEsperadosLocal);
-			List<Double> poissonVisitante = soccer.distPoissonPorGol(golesEsperadosVisitante);
+	List<Double> poissonLocal = soccer.distPoissonPorGol(golesEsperadosLocal);
+	List<Double> poissonVisitante = soccer.distPoissonPorGol(golesEsperadosVisitante);
 			
 			
-		
-				Integer var = 100;
-				double[][] res = new double[11][11];
+	Integer var = 100;
+	double[][] res = new double[11][11];
 				
-				for(int a = 0; a<poissonLocal.size(); a++) {
-					Double l = poissonLocal.get(a);
+	for(int a = 0; a<poissonLocal.size(); a++) {
+		Double l = poissonLocal.get(a);
 					
-					for(int b = 0; b<poissonVisitante.size(); b++) {
-						Double v = poissonVisitante.get(b);
-						res[a][b] = (l*v)*var; 
-					}
-				}
+	for(int b = 0; b<poissonVisitante.size(); b++) {
+		Double v = poissonVisitante.get(b);
+		res[a][b] = (l*v)*var; 
+		}
+	}
 				
-				
-				Double homelocal = 0.0;
-				Double awayvisitante = 0.0;
-				Double draw = 0.0;
+	Double homelocal = 0.0;
+	Double awayvisitante = 0.0;
+	Double draw = 0.0;
 
-				
-				for(int a = 0; a<poissonLocal.size(); a++) {
-					for(int b = 0; b<poissonVisitante.size(); b++) {
-						if(a==b) {
-							draw += res[a][b];
-						}if(a<b) {
-							awayvisitante += res[a][b];
-						}if(a>b) {
-							homelocal += res[a][b];
-						}
-						
-					}
-				}
+	for(int a = 0; a<poissonLocal.size(); a++) {
+		for(int b = 0; b<poissonVisitante.size(); b++) {
+			if(a==b) {
+				draw += res[a][b];
+			}if(a<b) {
+				awayvisitante += res[a][b];
+			}if(a>b) {
+				homelocal += res[a][b];
+			}
+		}
+	}
 				
 				homelocal = Math.round(homelocal*100.0)/100.0;
 				draw = Math.round(draw*100.0)/100.0;

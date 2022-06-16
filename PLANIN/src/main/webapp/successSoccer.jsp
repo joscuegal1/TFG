@@ -48,7 +48,7 @@
 <br>
 <br>
 
-<h1>LA PROBABILIDAD DE POISSON APORTA UN PESO DEL <c:out value="${requestScope.pesoPoisson}"/>%</h1>
+<h1>EL RENDIMIENTO DE LA TEMPORADA APORTA UN PESO DEL <c:out value="${requestScope.pesoPoisson}"/>%</h1>
 
 <h3><c:out value="${requestScope.L}"/>% probabilidad de victoria local</h3>
 <h3><c:out value="${requestScope.D}"/>% probabilidad de empate</h3>
